@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: rung_user
+      POSTGRES_PASSWORD: rung_password
+      POSTGRES_DB: rung_db
+    volumes:
+      - rung_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rung_user -d rung_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - rung_internal
+
+  app:
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+    env_file: ../.env
+    environment:
+      DATABASE_URL: postgresql://rung_user:rung_password@db:5432/rung_db
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 180s
+    networks:
+      - rung_internal
+
+volumes:
+  rung_postgres_data:
+
+networks:
+  rung_internal:
+    driver: bridge

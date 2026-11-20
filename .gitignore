@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Poetry
+dist/
+
+# Env & secrets
+.env
+
+# Логи
+logs/*.log
+
+# Данные и артефакты
+data/*.db
+data/import/*.csv
+!data/import/.gitkeep
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
