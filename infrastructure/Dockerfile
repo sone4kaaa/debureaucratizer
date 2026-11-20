@@ -25,9 +25,10 @@ WORKDIR /app
 COPY --from=builder /app/.venv /app/.venv
 COPY backend/ backend/
 COPY scripts/ scripts/
+COPY streamlit_app/ streamlit_app/
 COPY run.py .
 
 RUN mkdir -p /app/logs /app/data
 
-EXPOSE 8000
+EXPOSE 8000 8501
 CMD ["uvicorn", "backend.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
