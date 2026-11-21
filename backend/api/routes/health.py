@@ -34,7 +34,7 @@ async def _check_redis() -> str:
 async def _check_qdrant() -> str:
     settings = get_settings()
     client = get_http_client(timeout=3.0)
-    resp = await client.get(f"{settings.qdrant_url}/collections")
+    resp = await client.get(f"{settings.qdrant_url}/collections", timeout=3.0)
     resp.raise_for_status()
     return "healthy"
 
@@ -42,7 +42,7 @@ async def _check_qdrant() -> str:
 async def _check_ollama() -> str:
     settings = get_settings()
     client = get_http_client(timeout=3.0)
-    resp = await client.get(f"{settings.ollama_url}/api/tags")
+    resp = await client.get(f"{settings.ollama_url}/api/tags", timeout=3.0)
     resp.raise_for_status()
     return "healthy"
 

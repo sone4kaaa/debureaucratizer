@@ -26,7 +26,7 @@ class TranslatorManager:
         settings = get_settings()
         try:
             client = get_http_client(timeout=5.0)
-            resp = await client.get(f"{settings.ollama_url}/api/tags")
+            resp = await client.get(f"{settings.ollama_url}/api/tags", timeout=5.0)
             self._ollama_available = resp.status_code == 200
         except Exception:
             self._ollama_available = False

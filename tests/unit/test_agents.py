@@ -94,7 +94,7 @@ async def test_validator_glossary_missing() -> None:
     state = await v.process(
         {
             "source_text": "Необходимо осуществить оплату.",
-            "translated_text": "Нужно заплатить деньги.",
+            "translated_text": "Нужно передать документы вовремя.",
             "glossary_used": [
                 {"source_text": "осуществить оплату", "target_text": "оплатить"}
             ],

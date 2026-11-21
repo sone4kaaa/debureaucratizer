@@ -28,6 +28,7 @@ async def ollama_generate(
                     "num_predict": max_tokens,
                 },
             },
+            timeout=300.0,  # per-request: клиент общий, таймаут первого вызова не тиражируется
         )
         resp.raise_for_status()
     except Exception as exc:

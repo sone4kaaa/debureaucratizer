@@ -85,7 +85,7 @@ async def test_early_exit_converged() -> None:
 async def test_low_score_two_iterations_budget_then_converge() -> None:
     v = _validator()
     c = _critic([5.0, 9.0], suggestions=["упростить"])
-    c.results[0]["critic_suggestions"] = ["упростить"]
+    c.results[1]["critic_suggestions"] = []  # на 9.0 замечаний уже нет -> converge
     e = _editor(["Сообщаем: надо оплатить."])
     sup = SupervisorAgent(v, c, e)
     state = await sup.process(dict(BASE_STATE))
