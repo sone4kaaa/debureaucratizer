@@ -26,6 +26,10 @@ Python 3.12, FastAPI, SQLAlchemy 2.0 (async), Postgres, Qdrant, Redis + Celery, 
 
 Мультиагентная система реализована **вручную** — без LangChain / LangGraph / CrewAI.
 
+> Подробное описание устройства проекта простым языком (алгоритмы, промпты
+> агентов, RAG, HITL, Docker-инструкция, шпаргалка «вопрос → ответ») —
+> в [docs/GUIDE.md](docs/GUIDE.md).
+
 ## Архитектура
 
 ```
